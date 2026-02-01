@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install dependencies for DSAR Portal",
+			"type": "shell",
+			"command": "npm install next@latest react@latest react-dom@latest tailwindcss@latest postcss@latest autoprefixer@latest @supabase/supabase-js @supabase/auth-helpers-nextjs zod stripe @stripe/stripe-js @types/node @types/react @types/react-dom",
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

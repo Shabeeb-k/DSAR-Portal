@@ -1,5 +1,65 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# DSAR Portal - SaaS Machine Test
+
+## Setup Steps
+
+1. **Clone the repo & install dependencies:**
+   ```sh
+   git clone <your-repo-url>
+   cd dsarportal
+   npm install
+   ```
+
+2. **Configure environment variables:**
+   - Copy `.env.local` and fill in:
+     - `NEXT_PUBLIC_SUPABASE_URL`
+     - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+     - `SUPABASE_SERVICE_ROLE_KEY`
+     - `STRIPE_SECRET_KEY`
+     - `STRIPE_WEBHOOK_SECRET`
+     - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+     - `STRIPE_SUBSCRIPTION_PRICE_ID`
+     - `NEXT_PUBLIC_BASE_URL` (e.g. http://localhost:3000)
+
+3. **Supabase DB setup:**
+   - Create a Supabase project.
+   - Run the SQL in `supabase_schema.sql` in the Supabase SQL editor.
+
+4. **Stripe setup:**
+   - Create a Stripe account (test mode).
+   - Create a subscription product and price, copy the price ID to `STRIPE_SUBSCRIPTION_PRICE_ID`.
+   - Set webhook endpoint to `/api/stripe-webhook` for events:
+     - `checkout.session.completed`
+     - `customer.subscription.created`
+     - `customer.subscription.updated`
+     - `customer.subscription.deleted`
+
+5. **Run the app:**
+   ```sh
+   npm run dev
+   ```
+
+## Test Credentials
+- **Admin:**
+  - Register a user, then set their role to `admin` in the Supabase `profiles` table.
+- **Owner:**
+  - Register via `/auth/register`.
+
+## Features
+- Company registration, admin approval, unique public URL
+- DSAR form (public), DSAR management (owner/admin)
+- Stripe subscription gating
+- Role-based access, Zod validation, audit logs, email stub
+
+## Bonus
+- Email notification stub: logs to console on DSAR creation
+- Audit logs: status changes for company and DSAR requests
+
+---
+
+**For any issues, check the console/logs for error details.**
+
 ## Getting Started
 
 First, run the development server:
